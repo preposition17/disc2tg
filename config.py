@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 ENV_PATH = os.path.join(ROOT_DIR, ".env")
+EXCLUDE_CHANNELS_PATH = os.path.join(ROOT_DIR, "exclude_channels.txt")
 
 load_dotenv(ENV_PATH)
 

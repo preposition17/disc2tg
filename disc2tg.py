@@ -18,12 +18,16 @@ from utils import (
     format_text,
     bold,
     code,
-    text_wrap
+    text_wrap,
+    get_exclude_channels
 )
 
 
 ds_bot = SelfBot(DISCORD_TOKEN)
 tg_bot = TeleBot(TELEGRAM_TOKEN)
+
+exclude_channels = get_exclude_channels()
+# Че смотришь
 
 
 @ds_bot.message_handler
@@ -37,10 +41,11 @@ def test_handler(message):
                   f"{message.raw}\n")
             print()
 
+        if message.channel_id in exclude_channels: return
         tg_bot.send_message(TELEGRAM_CHAT_ID,
                             f"{bold(html.escape(message.channel.name))}\n"
                             f"{bold(html.escape(message.author.fullname))}\n"
-                            f"{code('——————————————————————————————————')}\n"
+                            f"{code('——————————————————————')}\n"
                             f"{code(html.escape(message.text))}",
                             parse_mode='html'
                             )

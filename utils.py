@@ -1,3 +1,23 @@
+from config import EXCLUDE_CHANNELS_PATH
+
+
+def get_exclude_channels():
+    with open(EXCLUDE_CHANNELS_PATH, "r+") as file:
+        lines = file.readlines()
+        channels = list()
+        for line in lines:
+            if not line: continue
+            if line[0] == "#": continue
+            if line == "\n": continue
+            line = line.replace("\n", "")
+            channels.append(line)
+        return channels
+
+
+
+
+
+
 def format_text(text: str) -> str:
     regular = "[]"
 
@@ -27,3 +47,7 @@ def text_wrap(text):
         return text
 
     return wrapped
+
+
+if __name__ == '__main__':
+    print(get_exclude_channels())
